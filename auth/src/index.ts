@@ -1,4 +1,5 @@
 import express from  'express';
+import 'express-async-errors';
 import {json} from  'body-parser';
 
 import { currentUserRouter } from './routes/current-user';
@@ -17,7 +18,7 @@ app.use(signOutRouter);
 app.use(signUpRouter);
 
 // ! below checks for non route exists
-app.all('*',()=>{
+app.all('*',async (req, res)=>{
     throw new NotFoundError();
 });
 app.use(errorHandler);
