@@ -1,7 +1,9 @@
 import express, {Request, Response} from 'express';
 import { body, validationResult } from 'express-validator';
+import { User } from '../models/user';
 import { RequestValidationError } from '../errors/request-validation-error';
 import { DatabaseConnectionError } from './../errors/database-connection-error';
+import { setOriginalNode } from 'typescript';
 
 const router = express.Router();
 
@@ -17,12 +19,19 @@ async (req :Request, res: Response)=>{
         throw new RequestValidationError(errors.array());
     }
 
-    const {email, password} = req.body;
+    const {email,password} = req.body;
 
-    console.log("Creating a user...");
-    throw new DatabaseConnectionError();
+    const existingUser = await User.findOne({email});
 
-    res.send({});
+    if(existingUser){
+        console.log('email in use');
+        return res.send({}) // empty response
+    }
+
+    const user = User.build({email, password});
+    await user.save(); //saving details to mongoDb
+
+    res.status(201).send(user); //record is created 
 });
 
 export {router as signUpRouter};
