@@ -1,3 +1,4 @@
+import { BadRequestError } from './../errors/bad-request-error';
 import express, {Request, Response} from 'express';
 import { body, validationResult } from 'express-validator';
 import { User } from '../models/user';
@@ -24,8 +25,7 @@ async (req :Request, res: Response)=>{
     const existingUser = await User.findOne({email});
 
     if(existingUser){
-        console.log('email in use');
-        return res.send({}) // empty response
+        throw new BadRequestError('Email in use');
     }
 
     const user = User.build({email, password});
