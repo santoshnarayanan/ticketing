@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Password } from "../services/password";
+import { Password } from '../services/password';
 
 //! An interface that describes proprties that are required
 //! to create a new user
@@ -30,6 +30,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+}, {
+  toJSON:{ //! customize JSON response
+    transform(doc,ret){
+      ret.id = ret._id;
+      delete ret._id;     //remove property id
+      delete ret.password; //remove property password
+      delete ret.__v;  //remove property __v
+    }
+  }
 });
 
 //! implemented middleware function in mongoose
