@@ -15,7 +15,7 @@ app.set('trust proxy', true); // traffic is routed through ingrex-ngnix
 app.use(json());
 app.use(cookieSession({
     signed:false, //encryption because jwt is encryted
-    secure:true   // https
+    secure: process.env.NODE_ENV != 'test'  // https
 })
 );
 
