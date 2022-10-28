@@ -8,7 +8,6 @@ beforeAll(async () => {
 
   mongo = new MongoMemoryServer();
   const mongoUri = await mongo.getUri();
-
   await mongoose.connect(mongoUri);
 });
 
@@ -21,6 +20,9 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
+  /* if(mongo){
+    await mongo.stop();
+  } */
   await mongo.stop();
   await mongoose.connection.close();
 });
