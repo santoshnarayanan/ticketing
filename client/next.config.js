@@ -1,6 +1,11 @@
 module.exports = {
-    webpackDevMiddleware: config =>{
-        config.watchOptions.poll = 300;
-        return config;
+    webpack: (config, { dev }) => {
+        if (dev) {
+            config.watchOptions = {
+                ignored: ['**/node_modules/'],
+                poll: 1000
+            }
+        }
+        return config
     }
 }
