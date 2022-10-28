@@ -6,9 +6,9 @@ let mongo: any;
 beforeAll(async () => {
   process.env.JWT_KEY = 'asdfasdf';
 
-  mongo = new MongoMemoryServer();
-  const mongoUri = await mongo.getUri();
-  await mongoose.connect(mongoUri);
+  const mongo = await MongoMemoryServer.create();
+  const mongoUri = mongo.getUri();
+  await mongoose.connect(mongoUri, {});
 });
 
 beforeEach(async () => {
@@ -20,9 +20,8 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  /* if(mongo){
+  if (mongo) {
     await mongo.stop();
-  } */
-  await mongo.stop();
+  }
   await mongoose.connection.close();
 });
