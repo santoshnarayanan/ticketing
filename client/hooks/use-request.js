@@ -8,7 +8,7 @@ export default ({ url, method, body, onSuccess }) => {
         try {
             setErrors(null);
             const response = await axios[method](url, body);
-
+            //user is redirected to landing page on successful login
             if (onSuccess) {
                 onSuccess(response.data);
             }
