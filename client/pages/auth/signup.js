@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+//! after successfull login user is redirected to landing page
 import Router from 'next/router';
+//! Use the useRequest component
 import useRequest from '../../hooks/use-request';
 
 export default () => {
@@ -12,12 +14,13 @@ export default () => {
             email,
             password
         },
+        //! additional param for call back for success login
         onSuccess: () => Router.push('/')
     });
 
     const onSubmit = async event => {
         event.preventDefault();
-
+        //! call the component
         await doRequest();
     };
 

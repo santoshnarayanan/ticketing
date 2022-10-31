@@ -7,8 +7,9 @@ export default ({ url, method, body, onSuccess }) => {
     const doRequest = async () => {
         try {
             setErrors(null);
+            //! [method] is lookup
             const response = await axios[method](url, body);
-            //user is redirected to landing page on successful login
+            //! user is redirected to landing page on successful login
             if (onSuccess) {
                 onSuccess(response.data);
             }
