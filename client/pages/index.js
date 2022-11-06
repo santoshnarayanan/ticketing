@@ -1,15 +1,25 @@
 import axios from "axios";
 
 const LandingPage = ({currentUser})=>{
-    console.log(currentUser);
-    axios.get('/api/users/currentuser');
+    //console.log(currentUser);
+    //axios.get('/api/users/currentuser');
     return <h1>Landing Page</h1>;
 };
 
-/* LandingPage.getInitialProps = async () =>{
-    const response = await axios.get('/api/users/currentuser');
+//always on server side rendering
+ LandingPage.getInitialProps = async () =>{
+    //const response = await axios.get('/api/users/currentuser');
 
-    return response.data;
-}; */
+    //return response.data;
+     if(typeof window === 'undefined'){
+         //we are on the server
+         //requests should be made to http://ingressnamespace.service....
+     }
+     else {
+         //we are on the browser request can be made with base url of ''
+     }
+     //console.log("I was executed");
+     return{};
+};
 
 export default  LandingPage;
