@@ -14,11 +14,7 @@ const LandingPage = ({currentUser})=>{
          //requests should be made to http://service.namespace....
          const {data} = await axios.get(
              'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser',
-             {
-                 headers: {
-                     Host:req.headers,
-                 }
-             }
+             {headers: req.headers }
          );
          return data;
      }
@@ -27,8 +23,6 @@ const LandingPage = ({currentUser})=>{
          const {data} = await axios.get('/api/users/currentuser');
          return data;
      }
-     //console.log("I was executed");
-     //return{};
 };
 
 export default  LandingPage;
