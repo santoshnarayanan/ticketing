@@ -7,9 +7,8 @@ const LandingPage = ({currentUser})=>{
 };
 
 //always on server side rendering
- LandingPage.getInitialProps = async () =>{
-    //const response = await axios.get('/api/users/currentuser');
-    //return response.data;
+ LandingPage.getInitialProps = async ({req}) =>{
+     //console.log(req.headers);
      if(typeof window === 'undefined'){
          //we are on the server
          //requests should be made to http://service.namespace....
@@ -17,7 +16,7 @@ const LandingPage = ({currentUser})=>{
              'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser',
              {
                  headers: {
-                     Host:'ticketing.local'
+                     Host:req.headers,
                  }
              }
          );
@@ -29,7 +28,7 @@ const LandingPage = ({currentUser})=>{
          return data;
      }
      //console.log("I was executed");
-     return{};
+     //return{};
 };
 
 export default  LandingPage;
