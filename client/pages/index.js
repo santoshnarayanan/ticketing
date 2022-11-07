@@ -1,4 +1,4 @@
-import buildClient from "../api/build-client";
+import buildClient from '../api/build-client';
 
 const LandingPage = ({ currentUser }) => {
   return currentUser ? (
@@ -8,11 +8,11 @@ const LandingPage = ({ currentUser }) => {
   );
 };
 
-//always on server side rendering
-LandingPage.getInitialProps = async (context) => {
+LandingPage.getInitialProps = async context => {
+  console.log('LANDING PAGE!');
   const client = buildClient(context);
-  const { data } = await client.get("/api/users/currentuser");
-  console.log(data);
+  const { data } = await client.get('/api/users/currentuser');
+
   return data;
 };
 
