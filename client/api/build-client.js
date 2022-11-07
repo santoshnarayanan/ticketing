@@ -11,7 +11,7 @@ export default ({req}) =>{
     else {
         //we are on the browser request can be made with base url of ''
         return axios.create({
-            baseURL: '/'
+            baseUrl: '/'
         });
     }
 };
