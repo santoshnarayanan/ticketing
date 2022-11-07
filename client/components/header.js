@@ -11,7 +11,7 @@ export default ({ currentUser }) => {
       return (
         <li key={href} className="nav-item">
           <Link href={href}>
-            {label}
+              <h6>{label}&nbsp;&nbsp;</h6>
           </Link>
         </li>
       );
@@ -20,7 +20,7 @@ export default ({ currentUser }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <Link href="/">
-        GitTix
+        <h6>GitTix</h6>
       </Link>
 
       <div className="d-flex justify-content-end">
